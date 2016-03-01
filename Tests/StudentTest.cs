@@ -23,6 +23,17 @@ namespace UniversityRegistrar
       Assert.Equal(0, result);
     }
 
+    [Fact]
+    public void Test_StudentEqual_ReturnsTrue()
+    {
+      //Arrange, Act
+      Student firstStudent = new Student("John Smith", new DateTime(2015, 01, 18));
+      Student secondStudent = new Student("John Smith", new DateTime(2015, 01, 18));
+
+      //Assert
+      Assert.Equal(firstStudent, secondStudent);
+    }
+
     public void Dispose()
     {
       Student.DeleteAll();

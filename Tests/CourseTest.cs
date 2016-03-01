@@ -23,6 +23,17 @@ namespace UniversityRegistrar
       Assert.Equal(0, result);
     }
 
+    [Fact]
+    public void Test_CourseEqual_ReturnsTrue()
+    {
+      //Arrange, Act
+      Course firstCourse = new Course("Intro to programming", "COMP101");
+      Course secondCourse = new Course("Intro to programming", "COMP101");
+
+      //Assert
+      Assert.Equal(firstCourse, secondCourse);
+    }
+
     public void Dispose()
     {
       Student.DeleteAll();
