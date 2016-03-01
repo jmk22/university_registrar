@@ -99,7 +99,14 @@ namespace UniversityRegistrar
       SqlParameter nameParam = new SqlParameter();
       nameParam.ParameterName = "@StudentName";
       nameParam.Value = this.GetName();
+
+      SqlParameter enrollDateParam = new SqlParameter();
+      enrollDateParam.ParameterName = "@StudentEnrollDate";
+      enrollDateParam.Value = this.GetEnrollDate();
+
       cmd.Parameters.Add(nameParam);
+      cmd.Parameters.Add(enrollDateParam);
+
       rdr = cmd.ExecuteReader();
 
       while(rdr.Read())
@@ -125,7 +132,6 @@ namespace UniversityRegistrar
       {
         conn.Close();
       }
-
     }
   }
 }

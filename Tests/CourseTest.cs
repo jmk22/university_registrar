@@ -34,6 +34,21 @@ namespace UniversityRegistrar
       Assert.Equal(firstCourse, secondCourse);
     }
 
+    [Fact]
+    public void Test_Save_SavesCourseToDatabase()
+    {
+      //Arrange
+      Course testCourse = new Course("Intro to programming", "COMP101");
+      testCourse.Save();
+
+      //Act
+      List<Course> result = Course.GetAll();
+      List<Course> testList = new List<Course>{testCourse};
+
+      //Assert
+      Assert.Equal(testList, result);
+    }
+
     public void Dispose()
     {
       Student.DeleteAll();
