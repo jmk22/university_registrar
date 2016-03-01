@@ -49,6 +49,23 @@ namespace UniversityRegistrar
       Assert.Equal(testList, result);
     }
 
+    [Fact]
+    public void Test_Save_AssignsIdToStudentObject()
+    {
+      //Arrange
+      Student testStudent = new Student("John Smith", new DateTime(2015, 01, 18));
+      testStudent.Save();
+
+      //Act
+      Student savedStudent = Student.GetAll()[0];
+
+      int result = savedStudent.GetId();
+      int testId = testStudent.GetId();
+
+      //Assert
+      Assert.Equal(testId, result);
+    }
+
     public void Dispose()
     {
       Student.DeleteAll();
