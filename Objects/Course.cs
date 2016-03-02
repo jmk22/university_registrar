@@ -135,5 +135,46 @@ namespace UniversityRegistrar
       }
     }
 
+    public static Course Find(int searchId)
+    {
+      SqlDataReader rdr;
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("SELECT * FROM courses WHERE id = @CourseId", conn);
+
+      SqlParameter idParam = new SqlParameter();
+      idParam.ParameterName = "@CourseId";
+      idParam.Value = searchId.ToString();
+
+      cmd.Parameters.Add(idParam);
+
+      rdr = cmd.ExecuteReader();
+
+      int foundCourseId = 0;
+      string foundName = null;
+      string foundNumber = null;
+
+      while(rdr.Read())
+      {
+        foundCourseId = rdr.GetInt32(0);
+        foundName = rdr.GetString(1);
+        foundNumber = rdr.GetString(2);
+      }
+
+      Course foundCourse = new Course(foundName, foundNumber, foundCourseId);
+
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+
+      if (conn != null)
+      {
+        conn.Close();
+      }
+
+      return foundCourse;
+    }
+
   }
 }

@@ -66,6 +66,20 @@ namespace UniversityRegistrar
       Assert.Equal(testId, result);
     }
 
+    [Fact]
+    public void Test_Find_FindsCourseInDatabase()
+    {
+      //Arrange
+      Course testCourse = new Course("Intro to programming", "COMP101");
+      testCourse.Save();
+
+      //Act
+      Course foundCourse = Course.Find(testCourse.GetId());
+
+      //Assert
+      Assert.Equal(testCourse, foundCourse);
+    }
+
     public void Dispose()
     {
       Student.DeleteAll();

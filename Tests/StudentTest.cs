@@ -66,6 +66,39 @@ namespace UniversityRegistrar
       Assert.Equal(testId, result);
     }
 
+    [Fact]
+    public void Test_Find_FindsStudentInDatabase()
+    {
+      //Arrange
+      Student testStudent = new Student("John Smith", new DateTime(2015, 01, 18));
+      testStudent.Save();
+
+      //Act
+      Student foundStudent = Student.Find(testStudent.GetId());
+
+      //Assert
+      Assert.Equal(testStudent, foundStudent);
+    }
+
+    [Fact]
+    public void Test_AddCourse_AddsCourseToStudent()
+    {
+      //Arrange
+      Student testStudent = new Student("John Smith", new DateTime(2015, 01, 18));
+      testStudent.Save();
+
+      Course testCourse = new Course("Intro to programming", "COMP101");
+      testCourse.Save();
+
+      //Act
+      testStudent.AddCourse(testCourse);
+      List<Course> testCourseList = new List<Course> {testCourse};
+      // List<Course> resultCourseList = testStudent.GetCourses();
+      List<Course> resultCourseList = testStudent.GetCourses();
+      
+      Assert.Equal(testCourseList, resultCourseList);
+    }
+
     public void Dispose()
     {
       Student.DeleteAll();
